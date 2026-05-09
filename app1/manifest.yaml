@@ -10,22 +10,22 @@ metadata:
 spec:
   replicas: 2
   selector:
+    # using these labels replica set selects the pod
     matchLabels:
       project: roboshop
       tier: frontend
       component: app1
-
+  # This is pod definition, pod is subset of replicaset
   template:
     metadata:
       labels:
         project: roboshop
         tier: frontend
         component: app1
-
     spec:
       containers:
-        - name: app1
-          image: moulali22/app1:1.0.0
+      - name: app1
+        image: moulali22/app1:1.0.0
 ---
 apiVersion: v1
 kind: Service
@@ -41,15 +41,8 @@ spec:
   - protocol: TCP
     port: 80 # servie port
     targetPort: 80 # container port
-
 ---
 apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: app1
-  annotations:
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: 'apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app1
@@ -63,7 +56,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.pinjari99.online"  # lisntener rule edi
+  - host: "app1.daws88s.online"
     http:
       paths:
       - pathType: Prefix
@@ -72,21 +65,4 @@ spec:
           service:
             name: app1
             port:
-              number: 80'
-#     alb.ingress.kubernetes.io/scheme: internet-facing
-#     alb.ingress.kubernetes.io/tags: Environment=dev,Project=roboshop
-#     alb.ingress.kubernetes.io/target-type: ip
-#     alb.ingress.kubernetes.io/group.name: roboshop
-# spec:
-#   ingressClassName: alb
-#   rules:
-#   - host: "app1.pinjari99.online"  
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: "/"
-#         backend:
-#           service:
-#             name: app1
-#             port:
-#               number: 80
+              number: 80
