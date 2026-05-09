@@ -56,7 +56,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.daws88s.online"
+  - host: "app1.pinjari99.online"
     http:
       paths:
       - pathType: Prefix
