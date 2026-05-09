@@ -10,18 +10,18 @@ metadata:
 spec:
   replicas: 2
   selector:
-    # using these labels replica set selects the pod
     matchLabels:
       project: roboshop
       tier: frontend
       component: app1
-  # This is pod definition, pod is subset of replicaset
+
   template:
     metadata:
       labels:
         project: roboshop
         tier: frontend
         component: app1
+
     spec:
       containers:
         - name: app1
